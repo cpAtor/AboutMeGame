@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | AboutMeGame</title>
+  </head>
+  <body style="padding: 0; margin: 0;overflow: hidden">
+    <canvas id="unity-canvas"></canvas>
+    <script src="Build/AboutMeBuild.loader.js"></script>
+    <script>
+      let canvas = document.querySelector("#unity-canvas");
+      window.addEventListener("resize", resizeCanvas);
+      window.addEventListener("orientationchange", resizeCanvas);
+      window.addEventListener("load", resizeCanvas);
+      function resizeCanvas() {
+        canvas.width = window.innerWidth -1;
+        canvas.height = window.innerHeight -1;
+      }
+      createUnityInstance(canvas, {
+        dataUrl: "Build/AboutMeBuild.data",
+        frameworkUrl: "Build/AboutMeBuild.framework.js",
+        codeUrl: "Build/AboutMeBuild.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "AboutMeGame",
+        productVersion: "0.1",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      },onProgress, onSuccess, onError);
+      
+      function onSuccess(unityInstance){
+        
+      }
+
+      function onError(error){
+        let errorDiv = document.createElement("div");
+        errorDiv.innerText = error;
+        errorDiv.style.position = "absolute";
+        errorDiv.style.top = "50%";
+        errorDiv.style.left = "50%";
+        errorDiv.style.transform = "translate(-50%, -50%)";
+        errorDiv.style.width = "100%";
+        errorDiv.style.textAlign = "center";
+        errorDiv.style.fontSize = "30px";
+        errorDiv.style.color = "red";
+        errorDiv.style.backgroundColor = "white";
+        document.body.appendChild(errorDiv);
+      }
+      
+      function onProgress(progress){
+        if(progress < 1){
+          let progressBar = document.getElementById("progress-bar");
+          if(!progressBar){
+            progressBar = document.createElement("div");
+            progressBar.id = "progress-bar";
+            progressBar.style.width = "150px";
+            progressBar.style.height = "15px";
+            progressBar.style.position = "absolute";
+            progressBar.style.left = "50%";
+            progressBar.style.top = "50%";
+            progressBar.style.transform = "translate(-50%, -50%)";
+            progressBar.style.backgroundColor = "red";
+            document.body.appendChild(progressBar);
+          }
+          progressBar.innerHTML = `<div style="width: ${progress * 100}%; height: 100%; background-color: green;text-align: center; color: white;">${Math.round(progress * 100)}%</div>`;
+          console.info(progressBar, progress);
+        }else{
+          document.getElementById("progress-bar")?.remove();
+        }
+      }
+    </script>
+  </body>
+</html>
