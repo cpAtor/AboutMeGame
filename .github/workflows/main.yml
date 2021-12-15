@@ -41,11 +41,13 @@ jobs:
           targetPlatform: WebGL
       # Deploy
       - name: Deploy Github Pages
-        uses: ptienchuan/deploy-github-pages-action@1.0.0
+        uses: crazy-max/ghaction-github-pages@v2.5.0
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          source-directory: build/WebGL
+          keep-history: true,
+          build_dir: build/WebGL,
+          verbose: true
         
         
       
