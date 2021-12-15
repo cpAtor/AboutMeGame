@@ -38,15 +38,18 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          targetPlatform: WebGL
+          targetPlatform: WebGL,
+          buildsPath: build,
+          buildName: web
+          
       # Deploy
       - name: Deploy Github Pages
         uses: crazy-max/ghaction-github-pages@v2.5.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           keep-history: true,
-          build_dir: build/WebGL,
+          build_dir: build/web,
           verbose: true
         
         
