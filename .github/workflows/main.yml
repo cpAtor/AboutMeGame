@@ -20,19 +20,30 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Check-out 
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
           lfs: true
+      # Cache
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+      # Build
       - name: Build For WebGL
         uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           targetPlatform: WebGL
+      # Deploy
       - name: Deploy Github Pages
         uses: ptienchuan/deploy-github-pages-action@1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           source-directory: build/WebGL
         
