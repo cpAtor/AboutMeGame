@@ -38,8 +38,8 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          buildsPath: build,
-          buildName: web,
+          buildsPath: build
+          buildName: web
           targetPlatform: WebGL
           
           
@@ -49,8 +49,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          keep_history: true,
-          build_dir: build,
+          keep_history: true
+          build_dir: build/web
           verbose: true
         
         
