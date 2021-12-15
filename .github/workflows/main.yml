@@ -39,7 +39,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           targetPlatform: WebGL
-          
+          buildName: AboutMeGame
           
       # Deploy
       - name: Deploy Github Pages
@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           keep_history: false
-          build_dir: build/WebGL/WebGL
+          build_dir: build/WebGL/AboutMeGame
           verbose: true
         
         
