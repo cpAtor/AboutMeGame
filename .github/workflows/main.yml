@@ -47,8 +47,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          keep_history: true
-          build_dir: build
+          keep_history: false
+          build_dir: build/WebGL/WebGL
           verbose: true
         
         
