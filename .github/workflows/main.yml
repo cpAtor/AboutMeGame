@@ -50,7 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           keep_history: true
-          build_dir: build/web
+          build_dir: build
           verbose: true
         
         
