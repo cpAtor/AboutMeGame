@@ -40,7 +40,7 @@ jobs:
         with:
           targetPlatform: WebGL
           buildName: AboutMeBuild
-          
+          customParameters: -releaseCodeOptimization speed
       # Deploy
       - name: Deploy Github Pages
         uses: crazy-max/ghaction-github-pages@v2.5.0
